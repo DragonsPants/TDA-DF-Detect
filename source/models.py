@@ -116,7 +116,6 @@ def test_model( model: nn.Module, loader:DataLoader, device, num_batches = -1 ):
         total_correct = 0.0
         for image_batch, label_batch, grad_topo_batch, land_batch in loader:
 
-            print(image_batch.shape)
             image_batch = image_batch.to(device)
             grad_topo_batch = grad_topo_batch.to(device)
             land_batch = land_batch.to(device)
