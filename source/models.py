@@ -78,9 +78,8 @@ class xNetHead(nn.Module):
 
 def train_model(model, train_dataloader:DataLoader, device, num_epochs = 20):
     train_losses = []
-    optimizer = optim.Adam(model.parameters(), lr=0.01)
+    optimizer = optim.Adam(model.parameters(), lr=0.001)
     criterion = nn.CrossEntropyLoss()
-    scheduler = optim.lr_scheduler.StepLR(optimizer,step_size=30,gamma=0.5 ) 
 
     print(f"Running Model for {num_epochs} epochs")
     for epoch in tqdm(range(num_epochs)):
@@ -99,7 +98,6 @@ def train_model(model, train_dataloader:DataLoader, device, num_epochs = 20):
             seg_loss.backward()
             optimizer.step()
             running_loss += seg_loss.item() * image_batch.size(0)
-            scheduler.step()
         train_loss = running_loss / len(train_dataloader.dataset)
         train_losses.append(train_loss)
 
